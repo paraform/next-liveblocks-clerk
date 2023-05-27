@@ -1,8 +1,9 @@
 "use client";
 
-import { useMyPresence, useOthers } from "@/liveblocks.config";
+import { useMyPresence, useOthers, useSelf } from "@/liveblocks.config";
 
 import Cursor from "./cursor";
+import { UserButton } from "@clerk/nextjs";
 
 const COLORS = [
   "#E57373",
@@ -28,6 +29,7 @@ export function Example() {
    * Return all the other users in the room and their presence (a cursor position in this case)
    */
   const others = useOthers();
+  const self = useSelf();
 
   return (
     <main
@@ -49,11 +51,17 @@ export function Example() {
         })
       }
     >
-      <div className="pointer-events-none">
-        {cursor
-          ? `${cursor.x} × ${cursor.y}`
-          : "Move your cursor to broadcast its position to other people in the room."}
-      </div>
+      <>
+        <div className="pointer-events-none">
+          {cursor
+            ? `${cursor.x} × ${cursor.y}`
+            : "Move your cursor to broadcast its position to other people in the room."}
+        </div>
+        <div className="top-4 right-4 absolute">
+          <UserButton afterSignOutUrl="/" />
+          Self: {self?.id}
+        </div>
+      </>
 
       {
         /**

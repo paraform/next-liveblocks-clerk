@@ -1,5 +1,6 @@
 import "./globals.css";
 
+import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import { RoomWrapper } from "@/components/room-wrapper";
 
@@ -16,10 +17,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <RoomWrapper>{children}</RoomWrapper>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <RoomWrapper>{children}</RoomWrapper>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
