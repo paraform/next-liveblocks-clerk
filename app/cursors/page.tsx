@@ -1,9 +1,8 @@
 "use client";
 
-import { useMyPresence, useOthers, useSelf } from "@/liveblocks.config";
+import { useMyPresence, useOthers } from "@/liveblocks.config";
 
-import Cursor from "./cursor";
-import { UserButton } from "@clerk/nextjs";
+import Cursor from "@/components/cursor";
 
 const COLORS = [
   "#E57373",
@@ -16,7 +15,9 @@ const COLORS = [
   "#7986CB",
 ];
 
-export function Example() {
+type PageProps = {};
+
+function Page(props: PageProps) {
   /**
    * useMyPresence returns the presence of the current user and a function to update it.
    * updateMyPresence is different than the setState function returned by the useState hook from React.
@@ -29,7 +30,6 @@ export function Example() {
    * Return all the other users in the room and their presence (a cursor position in this case)
    */
   const others = useOthers();
-  const self = useSelf();
 
   return (
     <main
@@ -51,18 +51,6 @@ export function Example() {
         })
       }
     >
-      <>
-        <div className="pointer-events-none">
-          {cursor
-            ? `${cursor.x} × ${cursor.y}`
-            : "Move your cursor to broadcast its position to other people in the room."}
-        </div>
-        <div className="top-4 right-4 absolute">
-          <UserButton afterSignOutUrl="/" />
-          Self: {self?.id}
-        </div>
-      </>
-
       {
         /**
          * Iterate over other users and display a cursor based on their presence
@@ -87,3 +75,5 @@ export function Example() {
     </main>
   );
 }
+
+export default Page;

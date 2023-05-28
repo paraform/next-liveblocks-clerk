@@ -19,7 +19,7 @@ function useOverrideRoomId(roomId: string) {
   return overrideRoomId;
 }
 export function RoomWrapper({ children }: { children: ReactNode }) {
-  const roomId = useOverrideRoomId("next-cursors");
+  const roomId = useOverrideRoomId("next-liveblocks-clerk");
 
   return (
     <RoomProvider

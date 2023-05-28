@@ -1,10 +1,11 @@
 import "./globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
-import { Inter } from "next/font/google";
+import { DM_Sans as FontSans } from "next/font/google";
+import Header from "@/components/header";
 import { RoomWrapper } from "@/components/room-wrapper";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSans = FontSans({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -19,7 +20,8 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={fontSans.className}>
+          <Header />
           <RoomWrapper>{children}</RoomWrapper>
         </body>
       </html>
